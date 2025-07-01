@@ -1,4 +1,26 @@
-# combine_files.py (Version 2.0)
+#!/usr/bin/env python3
+"""
+将多个文件合并成一个单一的文本文件。
+
+使用方法:
+    python3 combine_files.py <输出文件> <包含路径1> <包含路径2> ... [--exclude <排除模式1> <排除模式2> ...]
+
+参数:
+    output_file:         合并后内容的输出文件名。
+    include_patterns:    要包含的文件或目录的路径模式。支持通配符。
+    --exclude, -e:       要排除的文件或目录的路径模式。支持通配符。
+
+使用例子:
+    # 将 my_project/ 目录下的所有文件合并到 project_source.txt，但排除 build 目录和所有 .log 文件
+    python3 combine_files.py project_source.txt my_project/ --exclude "/build/" "*.log"
+
+    # 将 my_project/src/ 目录下的所有 .py 和 .json 文件合并到 src_code.txt
+    python3 combine_files.py src_code.txt "my_project/src//*.py" "my_project/src//*.json"
+
+    # 将 my_project/ 目录及其所有子目录下的 .md 文件合并到 documentation.txt，但排除根目录下的 readme.md
+    python3 combine_files.py documentation.txt "my_project/**/.md" --exclude "/readme.md"
+"""
+
 import argparse
 import glob
 import os
