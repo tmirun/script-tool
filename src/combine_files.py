@@ -80,11 +80,18 @@ def combine_files(output_file, input_paths, exclude_patterns=None, use_absolute_
         files_to_process = []
         for f in candidate_files:
             is_excluded = False
+            normalized_f = os.path.normpath(f)
             for pattern in exclude_patterns:
+                normalized_pattern = os.path.normpath(pattern)
                 # fnmatch 用于路径与通配符模式的匹配
                 if fnmatch.fnmatch(os.path.basename(f), pattern) or fnmatch.fnmatch(f, pattern):
                     is_excluded = True
                     break  # 一旦匹配到一个排除模式，就无需再检查
+                # 检查是否是目录排除
+                if (pattern.endswith(os.path.sep) or pattern.endswith('/')) and \
+                   normalized_f.startswith(normalized_pattern + os.path.sep):
+                    is_excluded = True
+                    break
             if not is_excluded:
                 files_to_process.append(f)
     else:
