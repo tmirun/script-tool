@@ -88,6 +88,9 @@ def combine_files(output_file, input_paths, exclude_patterns=None, use_absolute_
                     is_excluded = True
                     break  # 一旦匹配到一个排除模式，就无需再检查
                 # 检查是否是目录排除
+                if os.path.isdir(normalized_pattern) and normalized_f.startswith(normalized_pattern + os.path.sep):
+                    is_excluded = True
+                    break
                 if (pattern.endswith(os.path.sep) or pattern.endswith('/')) and \
                    normalized_f.startswith(normalized_pattern + os.path.sep):
                     is_excluded = True
