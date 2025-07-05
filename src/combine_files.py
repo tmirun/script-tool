@@ -159,7 +159,7 @@ def main():
         nargs='*',
         default=[],
         help='需要排除的文件或目录模式列表，支持通配符。\n'
-             '例如: --exclude "**/build/*" "*.log" ".DS_Store"'
+             '例如: --exclude "**/build/*" "*.log" "ca-secrets/"'
     )
     parser.add_argument(
         '--absolute',
